@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About This Site — Raashid</title>
+<style>
+* { box-sizing: border-box; }
+
+@font-face {
+  font-family: "MyCustomFont";
+  src: url("Aino-Headline.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Bold";
+  src: url("Aino-Bold.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Normal";
+  src: url("Aino-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: black;
+  color: #FFFFFF;
+  font-family: "Normal", sans-serif;
+  padding: 2.5vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.header {
+  position: sticky;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1E1E1E;
+  border-radius: 5vw;
+  padding-left: 2.5vw;
+  padding-right: 2.5vw;
+}
+
+.logo {
+  font-family: "MyCustomFont", sans-serif;
+  font-size: 5vh;
+}
+
+.header a.logo {
+  font-family: "MyCustomFont", sans-serif;
+  font-size: 5vh;
+}
+
+.header a {
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 3vh;
+  line-height: 3vh;
+  border-radius: 2vh;
+  padding: 3vh 1.5vw;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header-right svg {
+  vertical-align: middle;
+  stroke: white;
+  width: 4.5vh;
+  height: 4.5vh;
+}
+
+.header-right svg:hover {
+  stroke: #8BD4EF;
+}
+
+.header-right .about-icon {
+  width: 4.5vh;
+  height: 4.5vh;
+  display: inline-block;
+  background-color: currentColor;
+  -webkit-mask-image: url("https://media.ffycdn.net/eu/estonian-business-and-innovation-agency/XWuSSCgyQoEJxAa2jHa6.svg?width=2400");
+  mask-image: url("https://media.ffycdn.net/eu/estonian-business-and-innovation-agency/XWuSSCgyQoEJxAa2jHa6.svg?width=2400");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  vertical-align: middle;
+  background-size: 62% 62%;
+  transform: translateY(0.08em);
+}
+
+.header-right a:hover .about-icon {
+  background-color: #8BD4EF;
+}
+
+.highlight {
+  color: #8BD4EF;
+}
+
+.experience {
+  position: relative;
+  display: inline-block;
+}
+
+.experience-hover {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  background: #8BD4EF;
+  color: #1E1E1E;
+  border: 0.2em solid white;
+  padding: 0.75em 0.75em;
+  border-radius: 1em;
+  white-space: nowrap;
+  font-size: 1em;
+  font-family: Normal, sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+
+.experience svg:hover + .experience-hover {
+  opacity: 1;
+}
+
+.thoughts {
+  position: relative;
+  display: inline-block;
+}
+
+.thoughts-hover {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  background: #8BD4EF;
+  color: #1E1E1E;
+  border: 0.2em solid white;
+  padding: 0.75em 0.75em;
+  border-radius: 1em;
+  white-space: nowrap;
+  font-size: 1em;
+  font-family: Normal, sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+
+.thoughts:hover svg:hover + .thoughts-hover {
+  opacity: 1;
+}
+
+.projects {
+  position: relative;
+  display: inline-block;
+}
+
+.projects-hover {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  background: #8BD4EF;
+  color: #1E1E1E;
+  border: 0.2em solid white;
+  padding: 0.75em 0.75em;
+  border-radius: 1em;
+  white-space: nowrap;
+  font-size: 1em;
+  font-family: Normal, sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+
+.projects:hover svg:hover + .projects-hover {
+  opacity: 1;
+}
+
+.about {
+  position: relative;
+  display: inline-block;
+}
+
+.about-hover {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  background: #8BD4EF;
+  color: #1E1E1E;
+  border: 0.2em solid white;
+  padding: 0.75em 0.75em;
+  border-radius: 1em;
+  white-space: nowrap;
+  font-size: 1em;
+  font-family: Normal, sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+
+.about:hover svg:hover +  .about-hover {
+  opacity: 1;
+}
+
+.about:hover .about-hover {
+  opacity: 1;
+}
+
+.experience-hover,
+.thoughts-hover,
+.projects-hover,
+.about-hover {
+    box-shadow: -0.1em 0.2em 0 rgba(255,255,255,0.5);
+}
+
+.article{max-width:880px;margin:4vh auto;background:#111;padding:2rem;border-radius:12px}
+h1{
+  font-family: "MyCustomFont";
+  font-weight: 100;
+  margin:0 0 1rem
+}
+.meta{color:rgba(255,255,255,0.6);margin-bottom:1.5rem}
+.article img{max-width:100%;height:auto;display:block;border-radius:8px;margin:1.5rem auto}
+</style>
+</head>
+<body>
+  <header class="header">
+    <a href="personal.html" class="logo">Raash<span class="highlight" style="color:#8BD4EF">i</span>d</a>
+    <div class="header-right">
+    <a href="experiences.html" class="experience"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M17.1875 16.3045C18.8503 14.3727 20 12.4018 20 10.2C20 6.22355 16.6421 3 12.5 3C8.35786 3 5 6.22355 5 10.2C5 14.1765 8.75 17.4 12.5 21C13.2931 20.2386 14.0861 19.4941 14.8438 18.7558M11.0937 13.0274C9.74847 12.2436 9.28758 10.5076 10.0642 9.15C10.8409 7.79239 12.561 7.32724 13.9062 8.11106C15.2514 8.89488 15.7123 10.6308 14.9356 11.9885C14.7192 12.3668 14.4295 12.6758 14.0951 12.9078" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  	<span class="experience-hover">Experiences</span>
+  </a>
+    <a href="thoughts.html" class="thoughts"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M18.05 19C20.7838 19 23 16.8414 23 14.1786C23 11.6676 21.0293 9.60496 18.5123 9.3779C17.9974 6.32728 15.2777 4 12 4C8.72227 4 6.0026 6.32728 5.48772 9.3779C2.97066 9.60496 1 11.6676 1 14.1786C1 16.8414 3.21619 19 5.95 19C8.55103 19 10.7039 19 13.1 19H13.65" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  	<span class="thoughts-hover">Thoughts</span>
+  </a>
+   	<a href="projects.html" class="projects"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  	<path d="M12 2V3M3 12H2M5.5 5.5L4.8999 4.8999M18.5 5.5L19.1002 4.8999M22 12H21M15.5 16.874C17.0141 15.7848 18 14.0075 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 14.0075 6.98593 15.7848 8.5 16.874V18.8C8.5 19.9201 8.5 20.4802 8.71799 20.908C8.90973 21.2843 9.21569 21.5903 9.59202 21.782C10.0198 22 10.5799 22 11.7 22H12.3C13.4201 22 13.9802 22 14.408 21.782C14.7843 21.5903 15.0903 21.2843 15.282 20.908C15.403 20.6705 15.4569 20.3922 15.4808 20M10 13.5H14M12 13.5V18.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  		</svg>
+  		<span class="projects-hover">Projects</span>
+  	</a>
+    <a href="expereinces two.html" class="about">
+      <span class="about-icon" aria-hidden="true"></span>
+  	  <span class="about-hover">Places</span>
+    </a>
+    </div>
+  </header>
+
+  <article class="article">
+    <h1>About This Site</h1>
+    <div class="meta"> A very meta post · 2026-05-10 </div>
+    <img src="site.png" alt="site screenshot">
+    <p>If you're reading this, I've finally put an end to literally years of procastination and published this site. In this post I want to 
+      delineate the intentions behind the design choices I've made on here.
+    </p>
+    <p>Firstly, I want to thank Estonia(yes the whole country) for being the inspiration behind the color scheme of the site, through their flag. Additionally,
+      they have graciously made their entire digital design philosophy available to the public through the website Brand Estonia where the 
+      vast majority of the icons and media on this site are sourced. Honestly, the Estonian Tourism website is one of the first websites in a
+      while that genuinely impressed me with its design, and I find Scandinavian design as a whole very aesthetically pleasing. I hope the little
+      homage I've done here does it justice.
+    </p>
+    <p>
+      Most of my choices were made with the intent of seemin as human as possible. For instance, the hand written animation and drawings throughout
+      the website were all made by me. While I don't think I'm a particularly skilled artist, I think including this imagery provides the site a 
+      human touch, imperfections and all. A similar sentiment is reflected in the pictures on the site, all of which were taken by me. 
+    </p>
+    <p>
+      There are elements on this site that are (mostly) professional like the projects and experiences tabs, but I hope you also spend time on
+      things like the places tab which are a little less serious. Most of my effort has gone towards those sections, and my hope is that they
+      give you an idea of who I am beyond the resume.
+    </p>
+    <p>
+      Anyways, if any of you have any suggestions or questions about the website please don't hesitate to tell me, you know where to find me. 
+      Thanks for reading my first blog(?) post on this shiny new toy of mine - Raashid.
+    </p>
+  </article>
+</body>
+</html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects</title>
+<style>
+* { box-sizing: border-box; }
+
+@font-face {
+  font-family: "MyCustomFont";
+  src: url("Aino-Headline.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Bold";
+  src: url("Aino-Bold.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Normal";
+  src: url("Aino-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: black;
+  color: #FFFFFF;
+  font-family: "Normal", sans-serif;
+  padding: 2.5vh;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.header {
+  position: sticky;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1E1E1E;
+  border-radius: 5vw;
+  padding-left: 2.5vw;
+  padding-right: 2.5vw;
+}
+
+.header a.logo { font-family: "MyCustomFont", sans-serif; font-size: 5vh; }
+
+.header a { color: white; text-align: center; text-decoration: none; font-size: 3vh; line-height: 3vh; border-radius: 2vh; padding: 3vh 1.5vw; }
+
+.header-right { display: flex; align-items: center; }
+.header-right svg { vertical-align: middle; stroke: white; width: 4.5vh; height: 4.5vh; }
+.header-right svg:hover { stroke: #8BD4EF; }
+.header-right .about-icon { width: 4.5vh; height: 4.5vh; display: inline-block; background-color: currentColor; -webkit-mask-image: url("https://media.ffycdn.net/eu/estonian-business-and-innovation-agency/XWuSSCgyQoEJxAa2jHa6.svg?width=2400"); mask-image: url("https://media.ffycdn.net/eu/estonian-business-and-innovation-agency/XWuSSCgyQoEJxAa2jHa6.svg?width=2400"); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain; vertical-align: middle; background-size: 62% 62%; transform: translateY(0.08em); }
+.header-right a:hover .about-icon { background-color: #8BD4EF; }
+.highlight { color: #8BD4EF; }
+
+.experience, .thoughts, .projects, .about { position: relative; display: inline-block; }
+.experience-hover, .thoughts-hover, .projects-hover, .about-hover { position: absolute; left: 50%; top: 100%; transform: translateX(-50%); background: #8BD4EF; color: #1E1E1E; border: 0.2em solid white; padding: 0.75em 0.75em; border-radius: 1em; white-space: nowrap; font-size: 1em; font-family: Normal, sans-serif; opacity: 0; pointer-events: none; transition: opacity 0.2s; z-index: 10; box-shadow: -0.1em 0.2em 0 rgba(255,255,255,0.5); }
+.experience svg:hover + .experience-hover, .thoughts svg:hover + .thoughts-hover, .projects svg:hover + .projects-hover, .about:hover .about-hover { opacity: 1; }
+
+.projects-intro {
+  max-width: 880px;
+  margin: 4vh auto 3.5vh;
+  padding: 0 0.25rem;
+  text-align: center;
+}
+
+.projects-divider {
+  width: min(420px, 90%);
+  height: 1px;
+  margin: 1.1rem auto 0;
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+.projects-intro h1 {
+  margin: 0 0 0.75rem;
+  font-family: "MyCustomFont", sans-serif;
+  font-size: clamp(2.2rem, 4vw, 4rem);
+  line-height: 1;
+  font-weight: 100;
+  display: inline;
+}
+
+.masonry-grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: 10px;
+  grid-auto-flow: row dense;
+  gap: 1.25rem;
+}
+
+.project-card {
+  display: block;
+  width: 100%;
+  padding: 1.25rem;
+  border: 1.5px solid #FFFFFF;
+  border-radius: 1.25rem;
+  background: linear-gradient(180deg, rgba(30, 30, 30, 0.98), rgba(18, 18, 18, 0.96));
+  box-shadow: 0 0.9rem 2rem rgba(0, 0, 0, 0.28);
+  align-self: start;
+  transition: border-color 0.2s ease;
+}
+
+.project-card:hover {
+  border-color: #8BD4EF;
+}
+
+.project-card.featured {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(30, 30, 30, 0.98), rgba(18, 18, 18, 0.96) 55%, rgba(139, 212, 239, 0.12));
+}
+
+.project-media {
+  width: 100%;
+  border-radius: 0.9rem;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  background: #111111;
+  border: 1.5px solid #FFFFFF;
+  transition: border-color 0.2s ease;
+}
+
+.project-card:hover .project-media {
+  border-color: #8BD4EF;
+}
+
+.project-media img,
+.project-media video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.project-card h2 {
+  margin: 0 0 0.45rem;
+  font-family: "Bold", sans-serif;
+  font-size: 1.35rem;
+  line-height: 1.2;
+}
+
+.project-date {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.project-card p {
+  margin: 0 0 0.9rem;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.55;
+}
+
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.project-meta span {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(139, 212, 239, 0.14);
+  color: #8BD4EF;
+  font-size: 0.85rem;
+}
+
+.project-card.link-card {
+  padding-bottom: 1rem;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.6rem;
+  color: #8BD4EF;
+}
+
+.project-link svg {
+  width: 1rem;
+  height: 1rem;
+  stroke: currentColor;
+  fill: none;
+}
+
+@media (max-width: 1080px) {
+  .masonry-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .masonry-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-intro,
+  .masonry-grid {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+}
+
+.desktop-only-notice { display: none; }
+
+@media (max-width: 900px) {
+  body > *:not(.desktop-only-notice) {
+    display: none !important;
+  }
+
+  .desktop-only-notice {
+    display: flex;
+    min-height: calc(100vh - 5vh);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    margin: 2.5vh;
+    border: 2px solid #8BD4EF;
+    border-radius: 1.25rem;
+    background: #1E1E1E;
+    color: #FFFFFF;
+    font-family: "Bold", sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+}
+
+</style>
+</head>
+<body>
+  <div class="desktop-only-notice">This page is desktop-only. Please open it on a larger screen.</div>
+  <header class="header">
+    <a href="personal.html" class="logo">Raash<span class="highlight">i</span>d</a>
+    <div class="header-right">
+      <a href="experiences.html" class="experience"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.1875 16.3045C18.8503 14.3727 20 12.4018 20 10.2C20 6.22355 16.6421 3 12.5 3C8.35786 3 5 6.22355 5 10.2C5 14.1765 8.75 17.4 12.5 21C13.2931 20.2386 14.0861 19.4941 14.8438 18.7558M11.0937 13.0274C9.74847 12.2436 9.28758 10.5076 10.0642 9.15C10.8409 7.79239 12.561 7.32724 13.9062 8.11106C15.2514 8.89488 15.7123 10.6308 14.9356 11.9885C14.7192 12.3668 14.4295 12.6758 14.0951 12.9078" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="experience-hover">Experiences</span>
+      </a>
+      <a href="thoughts.html" class="thoughts"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.05 19C20.7838 19 23 16.8414 23 14.1786C23 11.6676 21.0293 9.60496 18.5123 9.3779C17.9974 6.32728 15.2777 4 12 4C8.72227 4 6.0026 6.32728 5.48772 9.3779C2.97066 9.60496 1 11.6676 1 14.1786C1 16.8414 3.21619 19 5.95 19C8.55103 19 10.7039 19 13.1 19H13.65" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="thoughts-hover">Thoughts</span>
+      </a>
+      <a href="projects.html" class="projects"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2V3M3 12H2M5.5 5.5L4.8999 4.8999M18.5 5.5L19.1002 4.8999M22 12H21M15.5 16.874C17.0141 15.7848 18 14.0075 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 14.0075 6.98593 15.7848 8.5 16.874V18.8C8.5 19.9201 8.5 20.4802 8.71799 20.908C8.90973 21.2843 9.21569 21.5903 9.59202 21.782C10.0198 22 10.5799 22 11.7 22H12.3C13.4201 22 13.9802 22 14.408 21.782C14.7843 21.5903 15.0903 21.2843 15.282 20.908C15.403 20.6705 15.4569 20.3922 15.4808 20M10 13.5H14M12 13.5V18.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="projects-hover">Projects</span>
+      </a>
+      <a href="expereinces two.html" class="about"><span class="about-icon" aria-hidden="true"></span><span class="about-hover">Places</span></a>
+    </div>
+  </header>
+  <main>
+    <section class="projects-intro">
+      <h1>Projects</h1>
+      <div class="projects-divider" aria-hidden="true"></div>
+    </section>
+
+    <section class="masonry-grid" aria-label="Project gallery">
+      <article class="project-card link-card">
+        <span class="project-date">2026</span>
+        <h2>Starting 5</h2>
+        <p>A collection of trivia basketball games, in collaboration with Kumanan Mahalingam</p>
+        <a href="https://github.com/KumananMahalingam/Starting_5" target="_blank" rel="noopener noreferrer" class="project-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+              Github Repo
+            </a>
+        <div class="project-meta">
+          <span>Work in Progress</span><span>SQL</span><span>TypeScript</span><span>BeautifulSoup</span>
+        </div>
+      </article>
+
+      <article class="project-card">
+        <span class="project-date">2026</span>
+        <div class="project-media">
+          <img src="toogle.jpg" alt="UofToogle search engine interface">
+        </div>
+        <h2>UofToogle!</h2>
+        <p>An interactive, graph-based, search engine to browse UofT related web pages. CSC111 final project with Nathan
+          Cabral, Kenny Zheng and Luke Le.
+        </p>
+        <a href="https://github.com/bobbuildersbytes/CSproj2" target="_blank" rel="noopener noreferrer" class="project-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+              Github Repo
+            </a>
+        <div class="project-meta">
+          <span>BeautifulSoup</span><span>Flask</span><span>Graphs</span><span>Python</span>
+        </div>
+      </article>
+
+      <article class="project-card featured">
+        <span class="project-date">2026</span>
+        <div class="project-media">
+          <img src="orbit.png" alt="Orbit">
+        </div>
+        <h2>Orbit</h2>
+        <p>A social media service that displays the location and availability of your friends.
+          Using this, and past app usage, the app reccomends activities to do nearby(and who to do them with). 
+          Submission for UofT Hacks with Gabriel Yu and Ethan Ung. 
+        </p>
+                <a href="https://devpost.com/software/orbit-uaeizn" target="_blank" rel="noopener noreferrer" class="project-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+              Devpost Link
+            </a>
+        <div class="project-meta">
+          <span>Hackathon</span><span>MongoDB</span><span>Amplitude</span><span>Node.js</span>
+        </div>
+      </article>
+
+      <article class="project-card">
+        <span class="project-date">2026</span>
+        <div class="project-media">
+          <img src="woss.jpg" alt="IB stuff">
+        </div>
+        <h2>IB research papers</h2>
+        <div class="project-meta">
+          <span>Research</span>
+        </div>
+      </article>
+
+      <article class="project-card featured">
+        <span class="project-date">2024</span>
+        <h2>Wintern</h2>
+        <p> FBLA Coding and Programming National Finalist. A platform for a school's career development department. 
+          In collaboration with Sam Zhang.
+        </p>
+                <a href="https://github.com/bobbuildersbytes/WINtern" target="_blank" rel="noopener noreferrer" class="project-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+              Github Repo
+            </a>
+        <div class="project-meta">
+          <span>Competition</span><span>HTML</span><span>MongoDB</span>
+        </div>
+      </article>
+
+      <article class="project-card featured">
+        <span class="project-date">2023</span>
+        <div class="project-media">
+          <img src="invo.png" alt="Invopedia">
+        </div>
+        <h2>Invopedia</h2>
+        <p> A web-based application that allows users to upload or take a picture of a plant and identify if it's an invasive species, what it is, and how to exterminate it.
+            Submission to MetHacks with Sam Zhang and Aarush Behal.
+        </p>
+                <a href="https://devpost.com/software/invopedia" target="_blank" rel="noopener noreferrer" class="project-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+              Devpost Link
+            </a>
+        <div class="project-meta">
+          <span>Hackathon</span><span>Cohere</span><span>Azure</span><span>HTML</span>
+        </div>
+      </article>
+
+      <article class="project-card featured">
+        <span class="project-date">2023</span>
+        <div class="project-media">
+          <img src="digits.jpg" alt="Digits">
+        </div>
+        <h2>Digits</h2>
+        <p> A website with daily and unlimited variants of the popular, yet defunct, New York Times game,
+          Digits.
+        </p>
+                <a href="https://devpost.com/software/invopedia" target="_blank" rel="noopener noreferrer" class="project-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+              Try it now!
+            </a>
+        <div class="project-meta">
+          <span>HTML</span>
+        </div>
+      </article>
+
+      <article class="project-card featured">
+        <span class="project-date">2022</span>
+        <div class="project-media">
+          <img src="bop.png" alt="Bop">
+        </div>
+        <h2>Bop</h2>
+        <p> A concept for an app that teaches you languages using gamification and speech to text.
+          Hack the North submission.
+        </p>
+                <a href="https://devpost.com/software/bop-cydimv" target="_blank" rel="noopener noreferrer" class="project-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+              Devpost Link
+            </a>
+        <div class="project-meta">
+          <span>Hackathon</span><span>Pygame</span>
+        </div>
+      </article>
+
+    </section>
+  </main>
+  <script>
+    const masonryGrid = document.querySelector('.masonry-grid');
+
+    function sortCardsByDate() {
+      const cards = Array.from(masonryGrid.querySelectorAll('.project-card'));
+      cards.sort((a, b) => {
+        const yearA = parseInt(a.querySelector('.project-date').textContent, 10);
+        const yearB = parseInt(b.querySelector('.project-date').textContent, 10);
+        return yearB - yearA;
+      });
+      cards.forEach((card) => masonryGrid.appendChild(card));
+    }
+
+    function resizeMasonryItems() {
+      if (!masonryGrid) {
+        return;
+      }
+
+      const gridStyles = window.getComputedStyle(masonryGrid);
+      const rowHeight = Number.parseFloat(gridStyles.getPropertyValue('grid-auto-rows'));
+      const rowGap = Number.parseFloat(gridStyles.getPropertyValue('gap'));
+
+      masonryGrid.querySelectorAll('.project-card').forEach((card) => {
+        card.style.gridRowEnd = 'auto';
+        const cardHeight = card.getBoundingClientRect().height;
+        const rowSpan = Math.ceil((cardHeight + rowGap) / (rowHeight + rowGap));
+        card.style.gridRowEnd = `span ${rowSpan}`;
+      });
+    }
+
+    sortCardsByDate();
+    window.addEventListener('load', resizeMasonryItems);
+    window.addEventListener('resize', resizeMasonryItems);
+
+    masonryGrid?.querySelectorAll('img, video').forEach((media) => {
+      media.addEventListener('load', resizeMasonryItems);
+      media.addEventListener('loadedmetadata', resizeMasonryItems);
+      media.addEventListener('loadeddata', resizeMasonryItems);
+    });
+  </script>
+</body>
+</html>

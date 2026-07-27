@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Personal</title>
+<style>
+* {box-sizing: border-box;}
+@font-face {
+  font-family: "MyCustomFont";
+  src: url("Aino-Headline.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Bold";
+  src: url("Aino-Bold.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Normal";
+  src: url("Aino-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "AlarmClock";
+  src: url("alarm%20clock.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@keyframes rotate{
+from{
+	transform: rotate(0deg);
+}
+to{
+	transform: rotate(360deg);
+}
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: black;
+  color: #FFFFFF;
+  font-family: "Normal", sans-serif;
+  padding: 2.5vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+p {
+  font-family: "Normal", sans-serif;
+}
+
+.text-card {
+  background-color: #1E1E1E;
+  border: 2px solid #8BD4EF;
+  border-radius: 2vw;
+  padding: 2vh 2vw;
+  transition: border-color 0.2s ease;
+}
+
+.text-card:hover {
+  border-color: #FFFFFF;
+}
+
+.text-card p {
+  line-height: 1.5;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.social-links a {
+  color: #FFFFFF;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-links svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  stroke: currentColor;
+  fill: none;
+  transition: stroke 0.2s ease, transform 0.2s ease;
+}
+
+.social-links .email-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: inline-block;
+  background-color: currentColor;
+  -webkit-mask-image: url("https://media.ffycdn.net/eu/estonian-business-and-innovation-agency/HG5Msz5Kf8DNyp85K9D9.svg?width=2400");
+  mask-image: url("https://media.ffycdn.net/eu/estonian-business-and-innovation-agency/HG5Msz5Kf8DNyp85K9D9.svg?width=2400");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.social-links a:hover {
+  color: #8BD4EF;
+}
+
+.social-links a:hover svg {
+  transform: translateY(-1px);
+}
+
+.social-links a:hover .email-icon {
+  transform: translateY(-1px);
+}
+
+:root {
+  --circle-size: 480px; /* base size used to align slider and icons */
+}
+
+.header {
+  position: sticky;
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  background-color: #1E1E1E;
+  border-radius: 5vw;
+  padding-left: 2.5vw;
+  padding-right: 2.5vw;
+}
+
+.header a {
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 3vh; 
+  line-height: 3vh;
+  border-radius: 2vh;
+  padding: 3vh 1.5vw; /* Adjust padding for better spacing with flex */
+}
+
+.header a.logo {
+  font-family: "MyCustomFont", sans-serif;
+  font-size: 5vh;
+
+}
+
+.header-right {
+  display: flex; /* Use Flexbox for links */
+  align-items: center; /* Center the links with the SVG */
+}
+
+.header-right svg {
+  vertical-align: middle;
+  stroke: white;
+  width: 4.5vh;
+  height: 4.5vh
+}
+
+.header-right svg:hover {
+  stroke: #8BD4EF;
+}
+
+.header-right .about-icon {
+  width: 4.5vh;
+  height: 4.5vh;
+  display: inline-block;
+  background-color: currentColor;
+  -webkit-mask-image: url("https://media.ffycdn.net/eu/estonian-business-and-innovation-agency/XWuSSCgyQoEJxAa2jHa6.svg?width=2400");
+  mask-image: url("https://media.ffycdn.net/eu/estonian-business-and-innovation-agency/XWuSSCgyQoEJxAa2jHa6.svg?width=2400");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  vertical-align: middle;
+  background-size: 62% 62%;
+  transform: translateY(0.08em);
+}
+
+.header-right a:hover .about-icon {
+  background-color: #8BD4EF;
+}
+
+.highlight {
+  color: #8BD4EF; /* you can change to any color */
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 0.5fr 4fr 5fr;
+  align-items: start;
+  padding-top: 5vh;
+}
+
+@media (min-width: 769px) {
+  .slider-container {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .circle-container {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .grid-container > p {
+    grid-row: 1;
+    grid-column: 3;
+  }
+}
+
+.ring-text{
+	animation: rotate 50s linear infinite;
+	transform-origin: 50% 50%;
+	fill: #FFFFFF;
+}
+
+.asterisk{
+	fill: #8BD4EF;
+}
+
+.experience{
+  position: relative;
+  display: inline-block;
+}
+
+.experience-hover {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  background: #8BD4EF;
+  color: #1E1E1E;
+  border: 0.2em solid white;
+  padding: 0.75em 0.75em;
+  border-radius: 1em;
+  white-space: nowrap;
+  font-size: 1em;
+  font-family: Normal, sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+
+.experience svg:hover + .experience-hover {
+  opacity: 1;
+}
+
+.thoughts{
+  position: relative;
+  display: inline-block;
+}
+
+.thoughts-hover {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  background: #8BD4EF;
+  color: #1E1E1E;
+  border: 0.2em solid white;
+  padding: 0.75em 0.75em;
+  border-radius: 1em;
+  white-space: nowrap;
+  font-size: 1em;
+  font-family: Normal, sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+
+.thoughts:hover svg:hover + .thoughts-hover {
+  opacity: 1;
+}
+
+.projects{
+  position: relative;
+  display: inline-block;
+}
+
+.projects-hover {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  background: #8BD4EF;
+  color: #1E1E1E;
+  border: 0.2em solid white;
+  padding: 0.75em 0.75em;
+  border-radius: 1em;
+  white-space: nowrap;
+  font-size: 1em;
+  font-family: Normal, sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+
+.projects:hover svg:hover + .projects-hover {
+  opacity: 1;
+}
+
+.about{
+  position: relative;
+  display: inline-block;
+}
+
+.about-hover {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  background: #8BD4EF;
+  color: #1E1E1E;
+  border: 0.2em solid white;
+  padding: 0.75em 0.75em;
+  border-radius: 1em;
+  white-space: nowrap;
+  font-size: 1em;
+  font-family: Normal, sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+
+.about:hover .about-hover {
+  opacity: 1;
+}
+
+.desktop-only-notice {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  body > *:not(.desktop-only-notice) {
+    display: none !important;
+  }
+
+  .desktop-only-notice {
+    display: flex;
+    min-height: calc(100vh - 5vh);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    margin: 2.5vh;
+    border: 2px solid #8BD4EF;
+    border-radius: 1.25rem;
+    background: #1E1E1E;
+    color: #FFFFFF;
+    font-family: "Bold", sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+}
+
+.experience-hover,
+.thoughts-hover,
+.projects-hover,
+.about-hover,
+.share-hover {
+    box-shadow: -0.1em 0.2em 0 rgba(255,255,255,0.5);
+}
+
+.portrait-img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+  transform: translate(-50%, -50%);
+  /* slightly larger per user request while still inside the ring */
+  width: 70%;
+  height: 70%;
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: 1;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.circle-container svg {
+    z-index: 2;
+    pointer-events: none;
+}
+
+.circle-container svg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 94%;
+  height: 94%;
+  display: block;
+}
+
+.circle-container{
+	position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+	overflow: auto;
+	font-family: Bold, sans-serif;
+	position: relative;
+  aspect-ratio: 1 / 1; /* Always square */     /* Adjust as needed */
+  max-width: var(--circle-size);
+  margin: 0 auto;
+}
+
+.vertical-slider {
+  writing-mode: bt-lr;
+  -webkit-appearance: slider-vertical;
+  appearance: slider-vertical;
+  flex: 1;
+  width: 0.8rem;
+  height: calc(var(--circle-size) * 0.58);
+  accent-color: #8BD4EF;
+}
+
+.slider-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5vh;
+  aspect-ratio: 1 / 8;
+  width: 100%;
+  max-height: var(--circle-size);
+}
+
+.slider-value{
+    color: white;
+  font-family: "AlarmClock", Bold, sans-serif;
+    font-size: 3vh;
+    text-align: center;
+}
+
+.icon-toggle input {
+  display: none; /* hide checkbox */
+}
+
+.icon-toggle svg {     /* default color */
+  cursor: pointer;
+  transition: fill 0.3s;
+  stroke: white;
+}
+
+.icon-toggle svg {
+  width: calc(var(--circle-size) * 0.08);
+  height: calc(var(--circle-size) * 0.08);
+}
+
+/* When checked, change SVG fill */
+.icon-toggle input:checked + svg {
+  stroke: #8BD4EF;
+  fill: #8BD4EF;
+}
+
+</style>
+
+<style>
+/* Responsive: stack the ring, slider, and text on smaller screens */
+@media (max-width: 768px) {
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2vh;
+    align-items: center;
+    grid-auto-rows: auto;
+    padding-top: 2vh;
+  }
+
+  .grid-container > * {
+    grid-column: 1 !important;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .circle-container {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-width: var(--circle-size);
+    margin: 0 auto;
+    justify-self: center;
+    align-self: center;
+  }
+
+  .circle-container svg {
+    width: 85%;
+    height: 85%;
+  }
+
+  .slider-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    padding: 0;
+    aspect-ratio: auto;
+    height: auto;
+  }
+
+  .grid-container > p {
+    order: 3;
+    padding: 0 2vh;
+  }
+
+  .text-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .portrait-img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: auto;
+    margin: 0;
+    display: block;
+  }
+}
+
+@media (max-width: 480px) {
+  .portrait-img {
+    width: 70%;
+  }
+  .grid-container > p {
+    font-size: 3.2vh;
+  }
+}
+</style>
+
+<style>
+/* Make the vertical slider render as a horizontal slider on small screens */
+@media (max-width: 768px) {
+  .vertical-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    max-width: calc(var(--circle-size) * 0.95);
+    width: 90%;
+    height: 0.7rem;
+    writing-mode: horizontal-tb;
+    transform: none;
+    background: transparent;
+    border-radius: 999px;
+  }
+
+  .vertical-slider::-webkit-slider-runnable-track {
+    height: 0.7rem;
+    background: rgba(255,255,255,0.15);
+    border-radius: 999px;
+  }
+
+  .vertical-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    margin-top: -0.25rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    background: #8BD4EF;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .vertical-slider::-moz-range-track {
+    height: 0.7rem;
+    background: rgba(255,255,255,0.15);
+    border-radius: 999px;
+  }
+
+  .vertical-slider::-moz-range-thumb {
+    width: 1.1rem;
+    height: 1.1rem;
+    background: #8BD4EF;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 480px) {
+  .vertical-slider {
+    width: 88%;
+    height: 0.7rem;
+  }
+}
+</style>
+</head>
+<body>
+<div class="desktop-only-notice">This page is desktop-only. Please open it on a larger screen.</div>
+
+<header class="header">
+  <a href="personal.html" class="logo">Raash<span class="highlight">i</span>d</a>
+  <div class="header-right">
+    <a href="experiences.html" class="experience"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.1875 16.3045C18.8503 14.3727 20 12.4018 20 10.2C20 6.22355 16.6421 3 12.5 3C8.35786 3 5 6.22355 5 10.2C5 14.1765 8.75 17.4 12.5 21C13.2931 20.2386 14.0861 19.4941 14.8438 18.7558M11.0937 13.0274C9.74847 12.2436 9.28758 10.5076 10.0642 9.15C10.8409 7.79239 12.561 7.32724 13.9062 8.11106C15.2514 8.89488 15.7123 10.6308 14.9356 11.9885C14.7192 12.3668 14.4295 12.6758 14.0951 12.9078" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+	<span class="experience-hover">Experiences</span>
+</a>
+    <a href="thoughts.html" class="thoughts"><svg  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M18.05 19C20.7838 19 23 16.8414 23 14.1786C23 11.6676 21.0293 9.60496 18.5123 9.3779C17.9974 6.32728 15.2777 4 12 4C8.72227 4 6.0026 6.32728 5.48772 9.3779C2.97066 9.60496 1 11.6676 1 14.1786C1 16.8414 3.21619 19 5.95 19C8.55103 19 10.7039 19 13.1 19H13.65" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+	<span class="thoughts-hover">Thoughts</span>
+</a>
+  <a href="projects.html" class="projects"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path d="M12 2V3M3 12H2M5.5 5.5L4.8999 4.8999M18.5 5.5L19.1002 4.8999M22 12H21M15.5 16.874C17.0141 15.7848 18 14.0075 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 14.0075 6.98593 15.7848 8.5 16.874V18.8C8.5 19.9201 8.5 20.4802 8.71799 20.908C8.90973 21.2843 9.21569 21.5903 9.59202 21.782C10.0198 22 10.5799 22 11.7 22H12.3C13.4201 22 13.9802 22 14.408 21.782C14.7843 21.5903 15.0903 21.2843 15.282 20.908C15.403 20.6705 15.4569 20.3922 15.4808 20M10 13.5H14M12 13.5V18.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+		</svg>
+		<span class="projects-hover">Projects</span>
+	</a>
+
+    <a href="expereinces two.html" class="about">
+      <span class="about-icon" aria-hidden="true"></span>
+  	  <span class="about-hover">Places</span>
+    </a>
+  </div>
+</div>
+  </header>
+  <div class="grid-container">
+    <div class="circle-container">
+    <img src="2020.jpeg" alt="Portrait" class="portrait-img">
+    <svg viewBox=" 0 0 100 100">
+      <defs>
+        <path id="circle" d="
+        M 50, 50
+        m -37, 0
+        a 37,37 0 1,1 74,0
+        a 37,37 0 1,1 -74,0"/>
+      </defs>
+      <text class="ring-text">
+        <textPath xlink:href="#circle" startOffset="0" lengthAdjust="spacingAndGlyphs" textLength="232">
+          Raashid<tspan class="asterisk">*</tspan>
+          Azeem<tspan class="asterisk">*</tspan>
+          Ahamed<tspan class="asterisk">*</tspan>
+        </textPath>
+      </text>
+    </svg>
+    </div>
+    <div class="slider-container">
+      <label class="icon-toggle">
+        <input type="checkbox">
+        <svg height="5vh" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17 12C17 14.7614 14.7614 17 12 17C9.23855 17 6.99998 14.7614 6.99998 12C6.99998 9.23858 9.23855 7 12 7C13.64 7 15.0956 7.78962 16.0074 9.00942M12 4V2M12 22V20M18.9282 8L20.6602 7M3.33972 17L5.07177 16M18.9282 16L20.6602 17M3.33972 7L5.07177 8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </label>
+      <input type="range" min="1" max="9" value="1" orient="vertical" class="vertical-slider">
+      <div class="slider-value"><span id="sliderValue">2020</span></div>
+    </div>
+    <div class="text-column" style="grid-column: 3; color: #FFFFFF;">
+    <video autoplay muted playsinline disablePictureInPicture style="width: 100%; border-radius: 5px; margin-bottom: 2vh; display: block; pointer-events: none;">
+      <source src="ScreenRecording_04-27-2026 18-10-35_1.mov" type="video/quicktime">
+      <source src="ScreenRecording_04-27-2026 18-10-35_1.mov" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="text-card">
+      <p style="color: #FFFFFF; margin: 0;"> Hi! If you can't tell already, I'm Raashid, a second year Computer Science Student at the University of Toronto St.George.
+        I'm deeply interested in the many multidisciplinary applications of Computer Science, particularily regarding Geography and Economics. I love working with spatial and geographic data to help machines understand our world. 
+        <br><br>
+        This website is partly a portfolio of my work, but mostly 
+        a canvas to explore CSS gimmicks. In an era of rapid AI growth, which I hope to positively contrbute to, I think
+        it's important to remain in touch with what makes us uniquely human, including creative outlets like this.
+      </p>
+    </div>
+    <div class="social-links" aria-label="Contact links">
+      <a href="mailto:raashid.azeem@mail.utoronto.ca" aria-label="Email me">
+        <span class="email-icon" aria-hidden="true"></span>
+      </a>
+      <a href="https://github.com/bobbuildersbytes" target="_blank" rel="noreferrer" aria-label="GitHub profile">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.66-.22.66-.49v-1.7c-2.69.58-3.26-1.15-3.26-1.15-.44-1.12-1.08-1.42-1.08-1.42-.88-.6.07-.59.07-.59.97.07 1.48 1 1.48 1 .86 1.47 2.26 1.05 2.81.8.09-.63.34-1.05.62-1.29-2.14-.24-4.39-1.07-4.39-4.76 0-1.05.38-1.91 1-2.58-.1-.24-.43-1.24.09-2.58 0 0 .8-.26 2.62 1a9.1 9.1 0 0 1 4.77 0c1.82-1.26 2.62-1 2.62-1 .52 1.34.19 2.34.09 2.58.62.67 1 1.53 1 2.58 0 3.7-2.26 4.52-4.4 4.75.35.3.67.89.67 1.79v2.65c0 .27.16.58.67.49A10 10 0 0 0 12 2z" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+    </div>
+<script>
+const slider = document.querySelector('.vertical-slider');
+const sliderValue = document.getElementById('sliderValue');
+const toggle = document.querySelector('.icon-toggle input');
+const img = document.querySelector('.portrait-img');
+const yearMapping = {
+    1: '2013',
+    2: '2013',
+    3: '2013',
+    4: '2020',
+    5: '2020',
+    6: '2020',
+    7: '2026',
+    8: '2026',
+    9: '2026'
+};
+  function updateSliderProgress() {
+    const min = Number(slider.min);
+    const max = Number(slider.max);
+    const value = Number(slider.value);
+    const percent = ((value - min) / (max - min)) * 100;
+    const direction = window.matchMedia('(max-width: 768px)').matches ? 'to right' : 'to top';
+    slider.style.background = `linear-gradient(${direction}, #8BD4EF 0%, #8BD4EF ${percent}%, rgba(255,255,255,0.15) ${percent}%, rgba(255,255,255,0.15) 100%)`;
+  }
+
+  // Set image based on the mapped year and the toggle state
+  function updateImageForYear(year) {
+    if (year === '2013') {
+      img.src = toggle.checked ? '2013C.jpeg' : '2013.jpeg';
+    } else if (year === '2020') {
+      img.src = toggle.checked ? '2020C.jpeg' : '2020.jpeg';
+      } else if (year === '2026') {
+      img.src = toggle.checked ? 'qcc.png' : 'qcd.jpeg';
+    } else {
+      // Fallback: attempt a file named <year>.jpeg if present
+      img.src = year + '.jpeg';
+    }
+  }
+
+  slider.addEventListener('input', function() {
+    const year = yearMapping[this.value];
+    sliderValue.textContent = year;
+    updateSliderProgress();
+    updateImageForYear(year);
+  });
+
+  window.addEventListener('resize', updateSliderProgress);
+  updateSliderProgress();
+  // initialize image for the current slider value
+  updateImageForYear(yearMapping[slider.value]);
+
+// When toggle changes, re-evaluate the image for the current year
+toggle.addEventListener('change', function() {
+    const currentYear = yearMapping[slider.value];
+    updateImageForYear(currentYear);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Places</title>
+<style>
+* { box-sizing: border-box; }
+
+@font-face {
+  font-family: "MyCustomFont";
+  src: url("Aino-Headline.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Bold";
+  src: url("Aino-Bold.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Normal";
+  src: url("Aino-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #000000;
+  color: #FFFFFF;
+  font-family: "Normal", sans-serif;
+  padding: 2.5vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.header {
+  position: sticky;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1E1E1E;
+  border-radius: 5vw;
+  padding-left: 2.5vw;
+  padding-right: 2.5vw;
+  top: 2.5vh;
+  z-index: 1000;
+}
+
+main {
+  /* reserve space so content doesn't sit under the sticky header */
+  padding-top: calc(var(--header-height, 0px) + 1rem);
+}
+
+.logo {
+  font-family: "MyCustomFont", sans-serif;
+  font-size: 5vh;
+}
+
+.header a.logo {
+  font-family: "MyCustomFont", sans-serif;
+  font-size: 5vh;
+}
+
+.header a {
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 3vh;
+  line-height: 3vh;
+  border-radius: 2vh;
+  padding: 3vh 1.5vw;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header-right svg {
+  vertical-align: middle;
+  stroke: white;
+  width: 4.5vh;
+  height: 4.5vh;
+}
+
+.header-right svg:hover {
+  stroke: #8BD4EF;
+}
+
+.header-right .about-icon {
+  width: 4.5vh;
+  height: 4.5vh;
+  display: inline-block;
+  background-color: currentColor;
+  -webkit-mask-image: url("https://media.ffycdn.net/eu/estonian-business-and-innovation-agency/XWuSSCgyQoEJxAa2jHa6.svg?width=2400");
+  mask-image: url("https://media.ffycdn.net/eu/estonian-business-and-innovation-agency/XWuSSCgyQoEJxAa2jHa6.svg?width=2400");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  vertical-align: middle;
+  background-size: 62% 62%;
+  transform: translateY(0.08em);
+}
+
+.header-right a:hover .about-icon {
+  background-color: #8BD4EF;
+}
+
+.highlight {
+  color: #8BD4EF;
+}
+
+.experience{
+  position: relative;
+  display: inline-block;
+}
+
+.experience-hover {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  background: #8BD4EF;
+  color: #1E1E1E;
+  border: 0.2em solid white;
+  padding: 0.75em 0.75em;
+  border-radius: 1em;
+  white-space: nowrap;
+  font-size: 1em;
+  font-family: Normal, sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+
+.experience svg:hover + .experience-hover {
+  opacity: 1;
+}
+
+.thoughts{
+  position: relative;
+  display: inline-block;
+}
+
+.thoughts-hover {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  background: #8BD4EF;
+  color: #1E1E1E;
+  border: 0.2em solid white;
+  padding: 0.75em 0.75em;
+  border-radius: 1em;
+  white-space: nowrap;
+  font-size: 1em;
+  font-family: Normal, sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+
+.thoughts:hover svg:hover + .thoughts-hover {
+  opacity: 1;
+}
+
+.projects{
+  position: relative;
+  display: inline-block;
+}
+
+.projects-hover {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  background: #8BD4EF;
+  color: #1E1E1E;
+  border: 0.2em solid white;
+  padding: 0.75em 0.75em;
+  border-radius: 1em;
+  white-space: nowrap;
+  font-size: 1em;
+  font-family: Normal, sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+
+.projects:hover svg:hover + .projects-hover {
+  opacity: 1;
+}
+
+.about{
+  position: relative;
+  display: inline-block;
+}
+
+.about-hover {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  background: #8BD4EF;
+  color: #1E1E1E;
+  border: 0.2em solid white;
+  padding: 0.75em 0.75em;
+  border-radius: 1em;
+  white-space: nowrap;
+  font-size: 1em;
+  font-family: Normal, sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+
+.about:hover .about-hover {
+  opacity: 1;
+}
+
+.experience-hover,
+.thoughts-hover,
+.projects-hover,
+.about-hover {
+    box-shadow: -0.1em 0.2em 0 rgba(255,255,255,0.5);
+}
+
+.desktop-only-notice {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  body > *:not(.desktop-only-notice) {
+    display: none !important;
+  }
+
+  .desktop-only-notice {
+    display: flex;
+    min-height: calc(100vh - 5vh);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    margin: 2.5vh;
+    border: 2px solid #8BD4EF;
+    border-radius: 1.25rem;
+    background: #1E1E1E;
+    color: #FFFFFF;
+    font-family: "Bold", sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 2vh;
+  }
+
+  .header {
+    border-radius: 2rem;
+    padding: 1.5vh 1rem;
+  }
+
+  .logo {
+    font-size: 2.3rem;
+  }
+
+  .back-link {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+  }
+
+}
+</style>
+<script>
+  // measure header and set CSS variable used for main padding
+  function updateHeaderSpacing() {
+    const header = document.querySelector('.header');
+    if (!header) return;
+    const top = parseFloat(getComputedStyle(header).top) || 0;
+    const h = header.offsetHeight + top;
+    document.documentElement.style.setProperty('--header-height', h + 'px');
+  }
+  window.addEventListener('load', updateHeaderSpacing);
+  window.addEventListener('resize', updateHeaderSpacing);
+</script>
+</head>
+<body>
+  <div class="desktop-only-notice">This page is desktop-only. Please open it on a larger screen.</div>
+  <header class="header">
+    <a href="personal.html" class="logo">Raash<span class="highlight">i</span>d</a>
+    <div class="header-right">
+      <a href="experiences.html" class="experience"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.1875 16.3045C18.8503 14.3727 20 12.4018 20 10.2C20 6.22355 16.6421 3 12.5 3C8.35786 3 5 6.22355 5 10.2C5 14.1765 8.75 17.4 12.5 21C13.2931 20.2386 14.0861 19.4941 14.8438 18.7558M11.0937 13.0274C9.74847 12.2436 9.28758 10.5076 10.0642 9.15C10.8409 7.79239 12.561 7.32724 13.9062 8.11106C15.2514 8.89488 15.7123 10.6308 14.9356 11.9885C14.7192 12.3668 14.4295 12.6758 14.0951 12.9078" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+    <span class="experience-hover">Experiences</span>
+</a>
+      <a href="thoughts.html" class="thoughts"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M18.05 19C20.7838 19 23 16.8414 23 14.1786C23 11.6676 21.0293 9.60496 18.5123 9.3779C17.9974 6.32728 15.2777 4 12 4C8.72227 4 6.0026 6.32728 5.48772 9.3779C2.97066 9.60496 1 11.6676 1 14.1786C1 16.8414 3.21619 19 5.95 19C8.55103 19 10.7039 19 13.1 19H13.65" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+    <span class="thoughts-hover">Thoughts</span>
+</a>
+    <a href="projects.html" class="projects"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2V3M3 12H2M5.5 5.5L4.8999 4.8999M18.5 5.5L19.1002 4.8999M22 12H21M15.5 16.874C17.0141 15.7848 18 14.0075 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 14.0075 6.98593 15.7848 8.5 16.874V18.8C8.5 19.9201 8.5 20.4802 8.71799 20.908C8.90973 21.2843 9.21569 21.5903 9.59202 21.782C10.0198 22 10.5799 22 11.7 22H12.3C13.4201 22 13.9802 22 14.408 21.782C14.7843 21.5903 15.0903 21.2843 15.282 20.908C15.403 20.6705 15.4569 20.3922 15.4808 20M10 13.5H14M12 13.5V18.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="projects-hover">Projects</span>
+    </a>
+
+      <a href="expereinces two.html" class="about">
+        <span class="about-icon" aria-hidden="true"></span>
+      <span class="about-hover">Places</span>
+      </a>
+    </div>
+  </header>
+  <main>
+    <div id="globe-wrapper">
+      <div class="globe-canvas">
+        <canvas id="cobe-canvas" aria-label="Interactive globe"></canvas>
+      </div>
+      <div class="globe-text">
+        <div>
+          <div class="globe-title">Where <span class="highlight">I</span>'ve Been<span class="highlight">.</span></div>
+          <div class="scroll-prompt">(Scroll)</div>
+          <div class="scroll-prompt">*Work in Progress*</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="flip-section">
+      <div id="fixed-flipper">
+        <div id="main-board" class="board"></div>
+      </div>
+      <div id="flip-container"></div>
+    </div>
+  </main>
+
+  <script type="module">
+    import createGlobe from 'https://unpkg.com/cobe@latest?module';
+
+    const canvas = document.getElementById('cobe-canvas');
+
+    const globe = createGlobe(canvas, {
+      devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
+      width: 600 * 2,
+      height: 600 * 2,
+      phi: 0,
+      theta: 0.2,
+      dark: 1,
+      diffuse: 0.9,
+      mapSamples: 16000,
+      mapBrightness: 2,
+      baseColor: [1, 1, 1],
+      markerColor: [0.2, 0.4, 1],
+      glowColor: [0.3, 0.3, 0.3],
+      markers: [],
+      arcs: []
+    });
+
+    let phi = 0;
+    function animate() {
+      phi += 0.002; // subtle rotation
+      globe.update({ phi });
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Make canvas responsive: adjust COBE size on resize
+    function resizeGlobe() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const displaySize = Math.min(window.innerWidth * 0.9, 600);
+      globe.update({ width: Math.round(displaySize * dpr), height: Math.round(displaySize * dpr) });
+    }
+
+    window.addEventListener('resize', resizeGlobe);
+    // initial resize to match layout
+    resizeGlobe();
+  </script>
+
+  <script>
+    // Set up globe visibility observer first
+    const globeWrapper = document.getElementById("globe-wrapper");
+    const fixedflipper = document.getElementById("fixed-flipper");
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    let desktopFlipperShown = false;
+    let lastVisibleCardIndex = 0;
+    let pendingDesktopStart = false;
+
+    function setCardFlippersVisible(visible) {
+      const flippers = document.getElementsByClassName('card-flipper');
+      for (let i = 0; i < flippers.length; i++) {
+        flippers[i].style.display = visible ? '' : 'none';
+      }
+    }
+
+    if (globeWrapper && fixedflipper) {
+      const globeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting && isMobile) {
+            // Globe is not visible - show mobile flipper
+            fixedflipper.style.display = "flex";
+            setCardFlippersVisible(false);
+          } else if (!entry.isIntersecting && !isMobile) {
+            // Desktop: once the intro scrolls away, lock the shared flipper in place
+            fixedflipper.style.display = "flex";
+            setCardFlippersVisible(false);
+            if (!desktopFlipperShown) {
+              if (typeof cards !== 'undefined' && cards.length > 0) {
+                const initialCardIndex = lastVisibleCardIndex >= 0 ? lastVisibleCardIndex : 0;
+                // Always render the frozen desktop flipper into the shared mainBoard
+                startFlipAnimation(initialCardIndex, mainBoard);
+                desktopFlipperShown = true;
+              } else {
+                // cards not initialized yet; mark pending start so we can begin after cards are created
+                pendingDesktopStart = true;
+              }
+            }
+          } else {
+            // Globe is visible or desktop - hide shared flipper
+            fixedflipper.style.display = "none";
+            setCardFlippersVisible(true);
+            if (!isMobile) {
+              desktopFlipperShown = false;
+            }
+          }
+        });
+      }, { threshold: 0 });
+
+      globeObserver.observe(globeWrapper);
+    }
+
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ";
+
+    function fitTextToBentoBox(textEl, boxSelector = '.bento-item-2', minPx = 10, maxPx = 30) {
+      if (!textEl) return;
+      const box = textEl.closest(boxSelector);
+      if (!box) return;
+
+      const fits = () => {
+        return textEl.scrollHeight <= box.clientHeight && textEl.scrollWidth <= box.clientWidth;
+      };
+
+      let low = minPx;
+      let high = maxPx;
+      let best = minPx;
+
+      while (low <= high) {
+        const mid = Math.floor((low + high) / 2);
+        textEl.style.fontSize = mid + 'px';
+
+        if (fits()) {
+          best = mid;
+          low = mid + 1;
+        } else {
+          high = mid - 1;
+        }
+      }
+
+      textEl.style.fontSize = best + 'px';
+    }
+
+    function fitAllBentoText() {
+      const texts = document.querySelectorAll('.bento-item-2 .lorem-aino, .bento-item-5 .bounded-text');
+      texts.forEach((textEl) => {
+        const boxClass = textEl.closest('.bento-item-2') ? '.bento-item-2' : '.bento-item-5';
+        fitTextToBentoBox(textEl, boxClass);
+      });
+    }
+
+    let fitBentoTextFrame = null;
+    function scheduleFitAllBentoText() {
+      if (fitBentoTextFrame !== null) {
+        cancelAnimationFrame(fitBentoTextFrame);
+      }
+      fitBentoTextFrame = requestAnimationFrame(() => {
+        fitAllBentoText();
+        fitBentoTextFrame = null;
+      });
+    }
+    
+    // Define cards with background image, flip text, and per-card bento items
+    const cards = [
+      {
+        image: "belgium.JPG",
+        text: "BELGIUM",
+        items: {
+          "bento-item-1": '<img class="flag-img" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1e7-1f1ea.svg" alt="Belgium flag">',
+          "bento-item-4": '<img class="dresden-img" src="brux.png" alt="brux">',
+          "bento-item-5": '<span class="bounded-text">Brussels Metro</span>',
+        }
+      },
+      {
+        image: "lux.JPG",
+        text: "LUXEMBOURG",
+        items: {
+          "bento-item-1": '<img class="flag-img" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1f1-1f1fa.svg" alt="Luxembourg flag">',
+          "bento-item-4": '<img class="dresden-img" src="Luxembourg.png" alt="lux">',
+          "bento-item-5": '<span class="bounded-text">Free Transit :)</span>',
+        }
+      },
+      {
+        image: "netherlands.JPG",
+        text: "NETHERLANDS",
+        items: {
+          "bento-item-1": '<img class="flag-img" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1f3-1f1f1.svg" alt="Luxembourg flag">',
+          "bento-item-4": '<img class="dresden-img" src="nl.png" alt="netherlands">',
+          "bento-item-5": '<span class="bounded-text">Intercity</span>',
+        }
+      },
+      {
+        image: "_DSC0672.JPG",
+        text: "GERMANY",
+        items: {
+          "bento-item-1": '<img class="flag-img" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1e9-1f1ea.svg" alt="German flag">',
+          "bento-item-4": '<img class="dresden-img" src="dresden.png" alt="Dresden">',
+          "bento-item-5": '<span class="bounded-text">Dresden Tram!</span>',
+        }
+      },
+      {
+        image: "nia2.JPG",
+        text: "CANADA",
+        items: {
+          "bento-item-1": '<img class="flag-img" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1e8-1f1e6.svg" alt="Canadian flag">',
+          "bento-item-4": '<img class="ttc-img" src="ttc.png" alt="TTC">',
+          "bento-item-5": '<span class="bounded-text">TTC :(</span>',
+        }
+      },
+      {
+        image: "thailand.JPG",
+        text: "THAILAND",
+        items: {
+          "bento-item-1": '<img class="flag-img" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1f9-1f1ed.svg">',
+          "bento-item-4": '<img class="dresden-img" src="chao.png" alt="Chao Praya">',
+          "bento-item-3": '<span class="year-sideways">2025</span>',
+          "bento-item-5": '<span class="bounded-text">River Boat</span>',
+        }
+      },
+      {
+        image: "china.JPG",
+        text: "CHINA",
+        items: {
+          "bento-item-1": '<img class="flag-img" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1e8-1f1f3.svg" alt="China flag">',
+          "bento-item-4": '<img class="dresden-img" src="bullet.jpg" alt="Bullet Train">',
+          "bento-item-3": '<span class="year-sideways">2025</span>',
+          "bento-item-5": '<span class="bounded-text">Bullet Train :o</span>',
+        }
+      },
+      {
+        image: "port.JPG",
+        text: "PORTUGAL",
+        items: {
+          "bento-item-1": '<img class="flag-img" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1f5-1f1f9.svg" alt="Portugal flag">',
+          "bento-item-4": '<img class="dresden-img" src="lisb.jpg" alt="Portugal">',
+          "bento-item-3": '<span class="year-sideways">2025</span>',
+          "bento-item-5": '<span class="bounded-text">Tram 28</span>',
+        }
+      },
+      {
+        image: "usa.JPG",
+        text: "USA",
+        items: {
+          "bento-item-1": '<img class="flag-img" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1fa-1f1f8.svg" alt="USA flag">',
+          "bento-item-4": '<img class="dresden-img" src="wash.jpg" alt="Washington Metro">',
+          "bento-item-3": '<span class="year-sideways">2025</span>',
+          "bento-item-5": '<span class="bounded-text">DC Metro</span>',
+        }
+      },
+      {
+        image: "mally.JPG",
+        text: "MALAYSIA",
+        items: {
+          "bento-item-1": '<img class="flag-img" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1f2-1f1fe.svg" alt="Malaysia flag">',
+          "bento-item-4": '<img class="dresden-img" src="mal.png" alt="Malaysia">',
+          "bento-item-3": '<span class="year-sideways">2024</span>',
+          "bento-item-5": '<span class="bounded-text">River Cruise</span>',
+        }
+      },
+      {
+        image: "italics.JPG",
+        text: "ITALY",
+        items: {
+          "bento-item-1": '<img class="flag-img" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1ee-1f1f9.svg" alt="Italy flag">',
+          "bento-item-4": '<img class="dresden-img" src="treni.png" alt="ITALY">',
+          "bento-item-3": '<span class="year-sideways">2024</span>',
+          "bento-item-5": '<span class="bounded-text">Trenitalia</span>',
+        }
+      },
+      {
+        image: "vatican.JPG",
+        text: "VATICAN",
+        items: {
+          "bento-item-1": '<img class="flag-img" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1fb-1f1e6.svg" alt="Vatican flag">',
+          "bento-item-4": '<img class="dresden-img" src="walk.png" alt="ITALY">',
+          "bento-item-3": '<span class="year-sideways">2024</span>',
+          "bento-item-5": '<span class="bounded-text">Walking</span>',
+        }
+      },
+      {
+        image: "spain.JPG",
+        text: "SPAIN",
+        items: {
+          "bento-item-1": '<img class="flag-img" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1ea-1f1f8.svg" alt="India flag">',
+          "bento-item-4": '<img class="dresden-img" src="renfe.jpg" alt="Vande">',
+          "bento-item-3": '<span class="year-sideways">2024</span>',
+          "bento-item-5": '<span class="bounded-text">Renfe</span>',
+        }
+      },
+      {
+        image: "sing.JPG",
+        text: "SINGAPORE",
+        items: {
+          "bento-item-1": '<img class="flag-img" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1f8-1f1ec.svg" alt="Singapore flag">',
+          "bento-item-4": '<img class="dresden-img" src="smrt.png" alt="Singapore">',
+          "bento-item-3": '<span class="year-sideways">2024</span>',
+          "bento-item-5": '<span class="bounded-text">SMRT</span>',
+        }
+      },
+      {
+        image: "india.JPG",
+        text: "INDIA",
+        items: {
+          "bento-item-1": '<img class="flag-img" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1ee-1f1f3.svg" alt="India flag">',
+          "bento-item-4": '<img class="dresden-img" src="vande.jpg" alt="Vande">',
+          "bento-item-3": '<span class="year-sideways">2024</span>',
+          "bento-item-5": '<span class="bounded-text">Vande Bharat</span>',
+        }
+      },
+      {
+        image: "London.JPG",
+        text: "ENGLAND",
+        items: {
+          "bento-item-1": '<img class="flag-img" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1ec-1f1e7.svg" alt="UK flag">',
+          "bento-item-4": '<img class="dresden-img" src="tube.png" alt="Vande">',
+          "bento-item-3": '<span class="year-sideways">2023</span>',
+          "bento-item-5": '<span class="bounded-text">Tube</span>',
+        }
+      },
+      {
+        image: "jamaica.JPG",
+        text: "JAMAICA",
+        items: {
+          "bento-item-1": '<img class="flag-img" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1ef-1f1f2.svg" alt="Jamaica flag">',
+          "bento-item-4": '<img class="dresden-img" src="walk.png" alt="Vande">',
+          "bento-item-3": '<span class="year-sideways">2023</span>',
+          "bento-item-5": '<span class="bounded-text">Walking</span>',
+        }
+      },
+      {
+        image: "fra.PNG",
+        text: "FRANCE",
+        items: {
+          "bento-item-1": '<img class="flag-img" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1eb-1f1f7.svg" alt="Jamaica flag">',
+          "bento-item-4": '<img class="dresden-img" src="paris.jpg" alt="Paris Metro">',
+          "bento-item-3": '<span class="year-sideways">2015</span>',
+          "bento-item-5": '<span class="bounded-text">Métropolitain</span>',
+        }
+      },
+    ];
+
+    const flipContainer = document.getElementById("flip-container");
+    const mainBoard = document.getElementById("main-board");
+    let currentCardIndex = -1;
+
+    // Create card elements with bento grid on the right
+    if (flipContainer && cards.length > 0) {
+      cards.forEach((cardData, index) => {
+        const cardElement = document.createElement("div");
+        cardElement.className = "card-wrapper";
+        cardElement.id = `card-${index}`;
+
+        // Left side: background image
+        const bgSide = document.createElement("div");
+        bgSide.className = "card-bg-side";
+        bgSide.style.backgroundImage = `url("${cardData.image}")`;
+
+        // Flipper for this card
+        const flipper = document.createElement("div");
+        flipper.className = "card-flipper";
+
+        const board = document.createElement("div");
+        board.className = "board card-board";
+
+        flipper.appendChild(board);
+
+        // Right side: bento grid
+        const gridSide = document.createElement("div");
+        gridSide.className = "bento-grid-side";
+
+        // Define bento grid layout — each entry sets its bento class and default innerHTML
+        const bentoLayout = [
+          { class: "bento-item-1", html: "" },
+          { class: "bento-item-2", html: '<span class="lorem-aino">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tempor eros eget pulvinar accumsan. Aenean dui libero, volutpat eget nisi eget, aliquet placerat tellus. Maecenas aliquet est dignissim magna ultricies, eget finibus quam faucibus. Quisque commodo neque ut nunc rhoncus, at varius magna ornare.  Proin arcu enim, ultrices quis nisi vel, dictum lacinia est. Fusce nec risus finibus, hendrerit urna nec, ultrices neque. Pellentesque mattis mi metus, eget tristique ipsum imperdiet et. </span>' },
+          { class: "bento-item-3", html: '<span class="year-sideways">2026</span>' },
+          { class: "bento-item-4", html: "" },
+          { class: "bento-item-5", html: "" },
+        ];
+
+        bentoLayout.forEach(item => {
+          const bentoItem = document.createElement("div");
+          bentoItem.className = `bento-item ${item.class}`;
+          // Use card-specific content if available, otherwise layout default
+          bentoItem.innerHTML = (cardData.items && cardData.items[item.class]) || item.html;
+          gridSide.appendChild(bentoItem);
+        });
+
+        cardElement.appendChild(bgSide);
+        cardElement.appendChild(flipper);
+        cardElement.appendChild(gridSide);
+        flipContainer.appendChild(cardElement);
+
+        cardData.board = board;
+      });
+      // If the globe observer requested a desktop start before cards existed, start it now
+      if (pendingDesktopStart) {
+        const initialCardIndex = lastVisibleCardIndex >= 0 ? lastVisibleCardIndex : 0;
+        // Start frozen desktop flipper into the shared mainBoard
+        startFlipAnimation(initialCardIndex, mainBoard);
+        desktopFlipperShown = true;
+        pendingDesktopStart = false;
+        // ensure shared flipper is visible and per-card flippers hidden
+        if (fixedflipper) fixedflipper.style.display = 'flex';
+        setCardFlippersVisible(false);
+      }
+
+      scheduleFitAllBentoText();
+
+      // Convert bento-item-4 images to wrapping background scroll
+      document.querySelectorAll('.bento-item-4 img').forEach(img => {
+        const src = img.src || img.getAttribute('src');
+        if (!src) return;
+        const parent = img.parentElement;
+        parent.style.backgroundImage = `url("${src}")`;
+        parent.style.backgroundRepeat = 'repeat-x';
+        parent.style.backgroundPosition = '0 50%';
+        parent.style.backgroundSize = 'auto 100%';
+        img.remove();
+        const tempImg = new Image();
+        tempImg.onload = () => {
+          const ch = parent.clientHeight;
+          if (ch <= 0) return;
+          const aspect = tempImg.naturalWidth / tempImg.naturalHeight;
+          const tileW = Math.round(ch * aspect);
+          if (tileW <= 0) return;
+          parent.animate([
+            { backgroundPosition: '0px 50%' },
+            { backgroundPosition: `-${tileW}px 50%` }
+          ], { duration: 10000, iterations: Infinity, easing: 'linear' });
+        };
+        tempImg.src = src;
+      });
+    }
+
+    function createChar(letter, delay, board) {
+      const container = document.createElement("div");
+      container.className = "char";
+
+      const flip = document.createElement("div");
+      flip.className = "flip";
+      flip.textContent = " ";
+
+      container.appendChild(flip);
+      board.appendChild(container);
+
+      let index = 0;
+
+      const interval = setInterval(() => {
+        flip.textContent = chars[index % chars.length];
+        flip.classList.add("animate");
+
+        setTimeout(() => flip.classList.remove("animate"), 300);
+
+        if (chars[index % chars.length] === letter) {
+          clearInterval(interval);
+        }
+
+        index++;
+      }, 5 + delay);
+    }
+
+    function sizeFlipper(board) {
+      const chars = board.querySelectorAll('.char');
+      if (!chars.length) return;
+      const parent = board.parentElement;
+      if (!parent) return;
+      parent.offsetHeight;
+      const gap = 4;
+      const pad = parseFloat(getComputedStyle(board).paddingLeft) * 2;
+      const pw = parent.getBoundingClientRect().width;
+      const bw = Math.min(pw, 640);
+      const w = bw - pad;
+      const n = chars.length;
+      const cw = Math.max(6, Math.min(40, Math.floor((w - gap * (n - 1)) / n)));
+      const ch = Math.round(cw * 1.5);
+      const fs = Math.round(cw * 0.7);
+      chars.forEach(el => {
+        el.style.width = cw + 'px';
+        el.style.height = ch + 'px';
+        el.style.fontSize = fs + 'px';
+      });
+    }
+
+    function startFlipAnimation(cardIndex, board = mainBoard) {
+      if (!board || currentCardIndex === cardIndex && board === mainBoard) {
+        return;
+      }
+
+      if (board === mainBoard) {
+        currentCardIndex = cardIndex;
+      }
+
+      board.innerHTML = "";
+      const text = cards[cardIndex].text;
+      text.split("").forEach((letter, i) => {
+        createChar(letter, i * 40, board);
+      });
+      requestAnimationFrame(() => sizeFlipper(board));
+    }
+
+    // Trigger animation when each card comes into view
+    if (cards.length > 0 && flipContainer) {
+      const observerOptions = isMobile
+        ? { threshold: 0.05, rootMargin: '0px 0px -35% 0px' }
+        : { threshold: 0.3 };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const cardId = entry.target.id;
+            const cardIndex = parseInt(cardId.split("-")[1]);
+            lastVisibleCardIndex = cardIndex;
+            // If the desktop frozen shared flipper is active, always render into mainBoard
+            if (!isMobile && desktopFlipperShown) {
+              startFlipAnimation(cardIndex, mainBoard);
+            } else {
+              const cardBoard = cards[cardIndex].board || mainBoard;
+              startFlipAnimation(cardIndex, cardBoard);
+            }
+          }
+        });
+      }, observerOptions);
+
+      cards.forEach((_, index) => {
+        const cardElement = document.getElementById(`card-${index}`);
+        if (cardElement) {
+          observer.observe(cardElement);
+        }
+      });
+    }
+
+    if (isMobile) {
+      if (fixedflipper) {
+        fixedflipper.style.display = "none";
+        setCardFlippersVisible(true);
+      }
+      cards.forEach((cardData, index) => {
+        if (cardData.board) {
+          startFlipAnimation(index, cardData.board);
+        }
+      });
+    }
+
+    window.addEventListener('resize', scheduleFitAllBentoText);
+
+    let rf = null;
+    window.addEventListener('resize', () => {
+      if (rf) cancelAnimationFrame(rf);
+      rf = requestAnimationFrame(() => {
+        if (!isMobile && desktopFlipperShown) {
+          sizeFlipper(mainBoard);
+        } else {
+          cards.forEach(c => { if (c.board) sizeFlipper(c.board); });
+        }
+        rf = null;
+      });
+    });
+  </script>
+
+  <style>
+    #globe-wrapper{
+      display:flex;
+      justify-content:space-between;
+      align-items:stretch;
+      gap:2.5rem;
+      padding:3vh 0;
+    }
+
+    .globe-canvas{flex:1;display:flex;justify-content:center;align-items:center}
+    .globe-text{flex:1;display:flex;justify-content:center;align-items:center}
+
+    #cobe-canvas{max-width:100%;width:100%;height:auto;border-radius:1rem;display:block}
+
+    .globe-title{
+      font-family: "Bold", sans-serif;
+      font-weight: 700;
+      color: #FFFFFF;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1;
+      text-align:center;
+      white-space: normal;
+    }
+
+    .scroll-prompt {
+      margin-top: 1.5rem;
+      font-family: "Normal", sans-serif;
+      font-size: 0.9rem;
+      color: white;
+      text-align: center;
+      opacity: 0.8;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; }
+    }
+
+    #flip-section {
+      width: 100%;
+      position: relative;
+      /* remove horizontal padding so cards can reach viewport edges */
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    #fixed-flipper {
+      position: fixed;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50vw;
+      height: 100vh;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    #main-board {
+      display: flex;
+      gap: 4px;
+      flex-wrap: nowrap;
+      justify-content: center;
+      max-width: min(640px, 100%);
+      background: #333333;
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 2px solid #8BD4EF;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    #flip-container {
+      width: 100%;
+    }
+
+    .card-wrapper {
+      position: relative;
+      display: flex;
+      height: 100vh;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    .card-flipper {
+      position: absolute;
+      left: calc(-2.5vh);
+      top: 0;
+      width: 50vw;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .card-bg-side {
+      width: 50vw;
+      height: 100%;
+      box-sizing: border-box;
+      padding: 5vh 0;
+      background-size: cover;
+      background-position: right center;
+      background-attachment: scroll;
+      /* offset the page's body padding (2.5vh) so the image reaches the left edge */
+      margin-left: calc(-2.5vh);
+    }
+
+    .bento-grid-side {
+      flex: 1;
+      height: 100%;
+      box-sizing: border-box;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(20, 1fr);
+      gap: 1rem;
+      padding: 2rem;
+      background: #1a1a1a;
+      overflow-y: auto;
+    }
+
+    .bento-item {
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      background: #333333;
+      border: 2px solid white;
+    }
+
+    .bento-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      border-color: #8BD4EF;
+    }
+
+    /* Ensure flag images render clearly */
+    .bento-item-1 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.25rem;
+    }
+    .bento-item-1 .flag-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .bento-item-2 .lorem-aino {
+      display: block;
+      width: 100%;
+      height: 100%;
+      padding: 0.75rem;
+      text-align: left;
+      color: #ffffff;
+      font-family: "Normal", sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.35;
+      margin: 0;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+
+    .bento-item-4 {
+      padding: 0.25rem;
+      overflow: hidden;
+      border-radius: 0.5rem;
+      background-repeat: repeat-x;
+      background-position: 0 50%;
+      background-size: auto 100%;
+    }
+
+    .bento-item-5 .bounded-text {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      text-align: center;
+      color: #ffffff;
+      font-family: "Normal", sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.35;
+      margin: 0;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+
+    .bento-item-3 .year-sideways {
+      display: inline-block;
+      color: #8BD4EF;
+      font-family: "Bold", sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1;
+      letter-spacing: 0.06em;
+      transform: rotate(-90deg);
+      transform-origin: center;
+      white-space: nowrap;
+    }
+
+    .bento-item-1 { grid-column: span 1; grid-row: span 5; }
+    .bento-item-2 { grid-column: span 2; grid-row: span 15; }
+    .bento-item-2 {
+      align-items: stretch;
+      justify-content: stretch;
+      overflow: hidden;
+    }
+    .bento-item-3 {
+      grid-column: span 1;
+      grid-row: span 10;
+      container-type: size;
+      overflow: hidden;
+    }
+
+    @supports (font-size: 1cqh) {
+      .bento-item-3 .year-sideways {
+        /* Size text from box dimensions so it fills most of box-3 */
+        font-size: min(24cqh, 70cqw);
+      }
+    }
+    .bento-item-4 { grid-column: span 2; grid-row: span 2; }
+    .bento-item-5 {
+      grid-column: span 1;
+      grid-row: span 2;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .flip-card {
+      display: none;
+    }
+
+    .board {
+      display: flex;
+      gap: 4px;
+      flex-wrap: nowrap;
+      justify-content: center;
+      max-width: min(640px, 100%);
+      background: #333333;
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 2px solid #8BD4EF;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    #card {
+      background: #333333;
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 2px solid #8BD4EF;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    #board {
+      display: flex;
+      gap: 4px;
+      flex-wrap: nowrap;
+      justify-content: center;
+      max-width: min(640px, 100%);
+    }
+
+    .char {
+      width: 40px;
+      height: 60px;
+      background: #222;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 28px;
+      border-radius: 4px;
+      perspective: 400px;
+      overflow: hidden;
+      font-family: "MyCustomFont";
+    }
+
+    .flip {
+      display: inline-block;
+      transition: transform 0.4s ease;
+      transform-origin: center;
+    }
+
+    .flip.animate {
+      transform: rotateX(360deg);
+    }
+
+    @media (max-width: 768px) {
+      #globe-wrapper{flex-direction:column;gap:1.25rem}
+      .globe-title{font-size:1.5rem}
+      .char{}
+      #fixed-flipper {
+        position: absolute;
+        width: 100%;
+        height: 60vh;
+        display: none !important;
+        transform: none;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 0;
+        margin: 0;
+        z-index: 10;
+        justify-content: center;
+        align-items: center;
+        background: transparent;
+      }
+      .card-wrapper {
+        position: relative;
+        flex-direction: column;
+        width: 100%;
+        min-height: 100vh;
+      }
+      .card-flipper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        z-index: 10;
+        pointer-events: none;
+        transform: translateY(0);
+      }
+      .card-bg-side {
+        width: 100%;
+        height: 50vh;
+        padding: 0;
+        margin-left: 0;
+        background-attachment: scroll;
+        position: relative;
+      }
+      .bento-grid-side {
+        flex: 1;
+        height: 100%;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(20, 1fr);
+        gap: 0.75rem;
+        padding: 1rem;
+        background: #1a1a1a;
+        overflow-y: auto;
+      }
+      .bento-item { font-size: 0.75rem; }
+      .card-board {
+        max-width: 320px;
+      }
+      #main-board {
+        max-width: 300px;
+        padding: 1.5rem;
+      }
+      /* smaller flag on narrow screens */
+      .bento-item-1 .flag-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  </style>
+</body>
+</html>
