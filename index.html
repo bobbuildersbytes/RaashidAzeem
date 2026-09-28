@@ -394,6 +394,8 @@ p {
     object-fit: cover;
     z-index: 1;
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    image-rendering: auto;
+    will-change: transform;
 }
 
 .circle-container svg {
@@ -726,7 +728,7 @@ const yearMapping = {
     } else if (year === '2020') {
       img.src = toggle.checked ? '2020C.jpeg' : '2020.jpeg';
       } else if (year === '2026') {
-      img.src = toggle.checked ? 'qcc.png' : 'qcd.jpeg';
+      img.src = toggle.checked ? 'qcc.jpeg' : 'qcd_web.jpeg';
     } else {
       // Fallback: attempt a file named <year>.jpeg if present
       img.src = year + '.jpeg';
